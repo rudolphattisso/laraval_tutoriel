@@ -14,6 +14,8 @@ class Parcel extends Model
         protected $fillable = [
             'adresse_arr',
             'adresse_dep',
-            'poids'];
+            'poids',
+            'tracking_number'
+        ];
         
 }

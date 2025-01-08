@@ -1,32 +1,16 @@
 <?php
 
+use App\Http\Controllers\ParcelController;
 use App\Models\Parcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 
-Route::get('/', function () {
- $nbParcel = 3;
-  
-    return view('welcome' , ['nbParcel' => $nbParcel]);
-});
+//routage de la logique du controller  avce la classe ParcelController
+Route::get('/', [ParcelController::class, 'home_index']);
 
-Route::get('/register', function(){
-    return view('register');
-});
+Route::get('/register', [ParcelController::class, 'register_index']);
 
-// <!-- dd = die and dump; affichage des données du formulaire en Brut -->
-// Dans en paramètre de fonction il faudra choisir Request/ de cet import : Illuminate\Http\Request;
-Route::post('/register', function(Request $request){
 
-    $message = 'colis enregistré';
 
-    //insertion dans la bdd
-    $parcels = Parcel::create([
-        'adresse_arr' => $request->adresse_arr,
-        'adresse_dep' => $request->adresse_dep,
-        'poids' => $request->poids
-
-    ]);
-
-    return view('register',compact('message') );
-});
+Route::post('/register', [ParcelController::class,'register_new_parcel']);
